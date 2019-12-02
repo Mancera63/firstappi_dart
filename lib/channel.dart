@@ -35,7 +35,8 @@ class FirstapiChannel extends ApplicationChannel {
     logger.onRecord.listen((rec) => print("$rec ${rec.error ?? ""} ${rec.stackTrace ?? ""}"));
   
     final dataModel = ManagedDataModel.fromCurrentMirrorSystem();
-    final persistenStore = PostgreSQLPersistentStore.fromConnectionInfo("root", "passroot", "127.0.0.1", 5432, "epp_db");
+    //final persistenStore = PostgreSQLPersistentStore.fromConnectionInfo("root", "passroot", "127.0.0.1", 5432, "epp_db");
+    final persistenStore = PostgreSQLPersistentStore.fromConnectionInfo("wqicaqnkirqekv", "030dbd3417da4ad8f0b36e49cda3d02780b42f0da8bc73867bee39021fddbeec", "ec2-107-20-239-47.compute-1.amazonaws.com", 5432, "d55d6kkmsjk3jg");
     context = ManagedContext(dataModel,persistenStore);
 
     final authStorage = ManagedAuthDelegate<Usuarios>(context);
