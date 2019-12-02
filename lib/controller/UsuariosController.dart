@@ -68,7 +68,8 @@ class UsuariosController extends ResourceController{
   @Operation.get('user','pwd')
   Future<Response> loginUser(@Bind.path('user') String usuario, @Bind.path('pwd') String pwd ) async {
 
-    const clientID = "com.mancera.local";
+    //const clientID = "com.mancera.local";
+    const clientID = "com.app.standard";
     final body = "username=$usuario&password=$pwd&grant_type=password";
 
     // Note the trailing colon (:) after the clientID.
