@@ -76,7 +76,7 @@ class UsuariosController extends ResourceController{
     // A client identifier secret would follow this, but there is no secret, so it is the empty string.
     final clientCredentials = Base64Encoder().convert("$clientID:".codeUnits);
 
-    return Response.ok(clientCredentials.toString());
+    //return Response.ok(clientCredentials.toString());
 
     final response = await http.post(
       "https://web-dart.herokuapp.com/auth/token",
@@ -88,9 +88,9 @@ class UsuariosController extends ResourceController{
         );
 
     final json = jsonDecode(response.body);
-    /*if(json['error']!=null)
+    if(json['error']!=null)
       return Response.unauthorized();
-    else*/
+    else
       return Response.ok(json);
 
   }
