@@ -68,13 +68,15 @@ class UsuariosController extends ResourceController{
   @Operation.get('user','pwd')
   Future<Response> loginUser(@Bind.path('user') String usuario, @Bind.path('pwd') String pwd ) async {
 
-    //const clientID = "com.mancera.local";
-    const clientID = "com.app.standard";
+    const clientID = "com.mancera.local";
+    //const clientID = "com.app.standard";
     final body = "username=$usuario&password=$pwd&grant_type=password";
 
     // Note the trailing colon (:) after the clientID.
     // A client identifier secret would follow this, but there is no secret, so it is the empty string.
     final clientCredentials = Base64Encoder().convert("$clientID:".codeUnits);
+
+    return Response.ok(clientCredentials.toString());
 
     final response = await http.post(
       "https://web-dart.herokuapp.com/auth/token",
