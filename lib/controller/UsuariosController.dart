@@ -27,7 +27,7 @@ class UsuariosController extends ResourceController{
 
     return Response.ok(usuario);
   }
-
+*/
   @Operation.post()
   Future<Response> insUsuario() async{
     final usuario = Usuarios()..read(await request.body.decode(), ignore: ["idUsuario"] );
@@ -35,7 +35,7 @@ class UsuariosController extends ResourceController{
     final insertedUsuario = await query.insert();
     return Response.ok(insertedUsuario);
   }
-
+/*
   @Operation.put('idusuario')
   Future<Response> updUsuario(@Bind.path('idusuario') int id) async{
     final usuario = Usuarios()..read(await request.body.decode());
@@ -68,7 +68,7 @@ class UsuariosController extends ResourceController{
   @Operation.get('user','pwd')
   Future<Response> loginUser(@Bind.path('user') String usuario, @Bind.path('pwd') String pwd ) async {
 
-    final clientID = "com.mancera.local";
+    const clientID = "com.mancera.local";
     final body = "username=$usuario&password=$pwd&grant_type=password";
 
     // Note the trailing colon (:) after the clientID.
@@ -76,7 +76,7 @@ class UsuariosController extends ResourceController{
     final clientCredentials = Base64Encoder().convert("$clientID:".codeUnits);
 
     final response = await http.post(
-      "http://localhost:8888/auth/token",
+      "https://web-dart.herokuapp.com/auth/token",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Basic $clientCredentials"
@@ -85,9 +85,9 @@ class UsuariosController extends ResourceController{
         );
 
     final json = jsonDecode(response.body);
-    if(json['error']!=null)
+    /*if(json['error']!=null)
       return Response.unauthorized();
-    else
+    else*/
       return Response.ok(json);
 
   }

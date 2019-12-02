@@ -61,8 +61,8 @@ class FirstapiChannel extends ApplicationChannel {
     router.route("/areas[/:idarea]").link( () => AreasController(context) );
     router.route("/detallepedido[/:iddetped]").link( () => DetallePedidoController(context) );
     router.route("/areascliente[/:idareacliente]").link( () => AreasClienteController(context) );
+    router.route("/empleados[/:idempleado]").link( () => EmpleadosController(context) );
     //router.route("/productosareascliente[/:idproductoareacliente]").link( () => ProductosAreasClienteController(context) );
-    //router.route("/auth/token").link( () => AuthController(authServer) );
     router.route("/register").link(() => RegisterController(context,authServer));
     router.route("/auth/token").link(() => AuthController(authServer));
     router.route("/usuarios[/:user/:pwd]").link( () => UsuariosController(context) );
