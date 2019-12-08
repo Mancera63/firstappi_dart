@@ -36,7 +36,7 @@ class ClientesController extends ResourceController{
 
   @Operation.put('idcliente')
   Future<Response> updCliente(@Bind.path('idcliente') int id) async{
-    final cliente = Clientes()..read(await request.body.decode());
+    final cliente = Clientes()..read(await request.body.decode(), ignore: ["idCliente"]);
     final query = Query<Clientes>(context)..where((a) => a.idCliente).equalTo(id)..values = cliente;
     final updatedCliente = await query.updateOne();
     return Response.ok(updatedCliente);
