@@ -7,6 +7,13 @@ class DetallePedidoController extends ResourceController{
   DetallePedidoController(this.context);
   final ManagedContext context;
   
+  @Operation.get()
+  Future<Response> getAllDetallePedidos() async {
+    final detalleQuery = Query<DetallePedido>(context);
+    final detallepedidos = await detalleQuery.fetch();
+    return Response.ok(detallepedidos);
+  }
+  
   @Operation.get('idpedido')
   Future<Response> getAllDetallePedido(@Bind.path('idpedido') int id) async {
     var detpedidosQuery = Query<Productos>(context);
@@ -17,6 +24,27 @@ class DetallePedidoController extends ResourceController{
     final detpedidos = await detpedidosQuery.fetch();
     return Response.ok(detpedidos);
   }
+  
+  @Operation.get('iddetalle')
+  Future<Response> getEmpleadoByID(@Bind.path('iddetalle') int id) async{
+
+    final empleadoQuery = Query<DetallePedido>(context)..where((a)=>a.idDetalle).equalTo(id);
+    final empleado = await empleadoQuery.fetch();
+
+    if( empleado == null ){
+      return Response.notFound();
+    }
+
+    return Response.ok(empleado);
+  }
+
+
+  @Operation.put('idDetalle')
+  Future<Response> updEmpleado(@Bind.path('iddetalle') int id) async{
+    final empleado = DetallePedido()..read(await request.body.decode());
+    final query = Query<DetallePedido>(context)..where((a) => a.idDetalle).equalTo(id)..values = empleado;
+    final updatedEmpleado = await query.updateOne();
+    return Response.ok(updatedEmpleado);
 
   @Operation.post()
   Future<Response> insDetPedido() async{
